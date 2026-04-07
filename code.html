@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NumCrack Game</title>
+
+<style>
+body{
+    background:#0a0a0a;
+    color:#00f5d4;
+    font-family:Arial;
+    text-align:center;
+    padding:50px;
+}
+h1{
+    font-size:40px;
+}
+input{
+    padding:10px;
+    font-size:16px;
+    margin:10px;
+}
+button{
+    padding:10px 20px;
+    margin:10px;
+    background:#00f5d4;
+    border:none;
+    cursor:pointer;
+}
+button:hover{
+    background:#00c2a8;
+}
+#result{
+    margin-top:20px;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎯 NumCrack</h1>
+<p>Guess a number between 1 and 100</p>
+
+<button onclick="startGame()">Start Game</button><br>
+
+<input type="number" id="guessInput" placeholder="Enter number"><br>
+
+<button onclick="makeGuess()">Guess</button>
+
+<p id="result"></p>
+
+<script>
+let randomNumber;
+let attempts = 0;
+
+function startGame(){
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    attempts = 0;
+    document.getElementById("result").innerText = "Game started!";
+}
+
+function makeGuess(){
+    const guess = Number(document.getElementById("guessInput").value);
+    attempts++;
+
+    if(!randomNumber){
+        alert("Click Start Game first!");
+        return;
+    }
+
+    if(guess < randomNumber){
+        document.getElementById("result").innerText = "📉 Too low! Attempts: " + attempts;
+    }
+    else if(guess > randomNumber){
+        document.getElementById("result").innerText = "📈 Too high! Attempts: " + attempts;
+    }
+    else{
+        document.getElementById("result").innerText = "🎉 Correct! Total attempts: " + attempts;
+    }
+
+    document.getElementById("guessInput").value = "";
+}
+</script>
+
+</body>
+</html>
